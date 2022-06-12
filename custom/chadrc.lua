@@ -79,6 +79,7 @@ map("t","<esc>","<C-\\><C-n>",opt)
 -- lua config
 -- https://stackoverflow.com/questions/36108950/setting-up-powershell-as-vims-shell-command-does-not-seem-to-be-passed-correct
 
+-- https://www.reddit.com/r/neovim/comments/pc7in0/detect_os_in_lua/
 if jit.os=='Windows' then
 vim.cmd([[
 set shell=pwsh
