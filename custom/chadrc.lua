@@ -80,14 +80,23 @@ map("t","<esc>","<C-\\><C-n>",opt)
 -- https://stackoverflow.com/questions/36108950/setting-up-powershell-as-vims-shell-command-does-not-seem-to-be-passed-correct
 
 -- https://www.reddit.com/r/neovim/comments/pc7in0/detect_os_in_lua/
-if jit.os=='Windows' then
-vim.cmd([[
-set shell=pwsh\ -NoLogo shellpipe=\| shellxquote=
-  set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+if jit.os=='Windows' 
+  then
+    -- [How to configure what :! commands call in neovim?](https://www.reddit.com/r/neovim/comments/li8hur/how_to_configure_what_commands_call_in_neovim/)
+  vim.cmd([[
+  set shell=pwsh\ -NoLogo shellpipe=\| shellxquote=
+    set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+    set shellredir=\|\ Out-File\ -Encoding\ UTF8
   set shellredir=\|\ Out-File\ -Encoding\ UTF8
-set shellredir=\|\ Out-File\ -Encoding\ UTF8
-autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
-]])
+
+
+  autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
+  ]])
+else
+
+  vim.cmd([[
+  autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
+  ]])
 end
 
 --set shellcmdflag= '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
